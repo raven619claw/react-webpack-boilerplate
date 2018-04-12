@@ -1,6 +1,6 @@
 {
   "presets": [
-    "react",
+    "latest", "react", "stage-0",
     [ "env", {
       "targets": {
         "browsers": "> 2%"
@@ -9,6 +9,7 @@
   ],
 
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "transform-class-properties"
   ]
 }

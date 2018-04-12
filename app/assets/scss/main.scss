@@ -1,5 +1,11 @@
-$color: #262828;
-
-body {
-  color: $color;
+@import './variables';
+@import './core';
+@import './components/chatScreen';
+.chat-home {
+  background-image: url(../images/home.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  max-width: 700px;
+  width: 100%;
 }
