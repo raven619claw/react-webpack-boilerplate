@@ -32,7 +32,7 @@ class App extends Component {
   }
   getCityData = () => {
     const that = this
-    jsonp('http://ipinfo.io')
+    jsonp('https://ipinfo.io')
     .then((response) => {
       that.setState({
       userCity:response.city
