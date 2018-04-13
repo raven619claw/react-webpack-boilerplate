@@ -1,18 +1,20 @@
-import React from 'react';
+import React,{PureComponent} from 'react';
 
-const ChatInput = (props)=>{
-  const {onInputChange,inputValue,addChatMsg} = props
-  const onKeyPress = (event)=>{
-    if(event.which === 13 || event.keyCode === 13){
-      addChatMsg()
+class ChatInput extends PureComponent{
+  onKeyPress = (event)=>{
+    if((event.which === 13 || event.keyCode === 13) && event.target.value){
+      this.props.addChatMsg()
     }
   }
-  return(
-    <div className='input-container'>
-      <input onKeyPress={onKeyPress} placeholder='Type your message here...' type="text" value={inputValue} onChange={(e)=>{onInputChange(e)}}/>
-      <div className='send-btn' onClick={addChatMsg}>SEND</div>
-    </div>
-  )
+  render(){
+    const {onInputChange,inputValue,addChatMsg} = this.props
+    return(
+      <div className='input-container'>
+        <input onKeyPress={this.onKeyPress} placeholder='Type your message here...' type="text" value={inputValue} onChange={(e)=>{onInputChange(e)}}/>
+        <div className='send-btn' onClick={()=>{addChatMsg()}}>SEND</div>
+      </div>
+    )
+  }
 }
 
 export default ChatInput

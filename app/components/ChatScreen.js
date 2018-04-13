@@ -1,22 +1,44 @@
 import React, {
-  Component
+  Component,
+  Fragment
 } from 'react';
 import ChatInput from './ChatInput'
 import ChatMsg from './ChatMsg'
+import ChatPills from './ChatPills';
+import VideoTag from './VideoTag';
+import ImageSlider from './ImageSlider';
+import getCurrentStepInputValues from '../config/flowLogic'
 class ChatScreen extends Component {
 
-  componentDidMount(){
-    this.props.addChatMsg(`Hi, it is ${parseInt(this.props.userCityTemp)} degrees F outside in ${this.props.userCity}. How is your hair feeling?`)
+  renderMsg(msgData,addChatMsg){
+    if(msgData.msg.isVideoStep){
+      return(<VideoTag src={msgData.msg.src}/>)
+    }else if(msgData.msg.suggestions){
+      return(<Fragment>
+        <ChatMsg  source={msgData.source} msg={msgData.msg.txt}/>
+        <ChatPills suggestions={msgData.msg.suggestions} addChatMsg={addChatMsg}/>
+      </Fragment>
+      )
+    } else if(msgData.msg.isSliderStep){
+      return(<ImageSlider/>)
+    }else{
+      return(<ChatMsg {...msgData}/>)
+    }
   }
   render() {
-    const {onInputChange,inputValue,addChatMsg,chatMessages} = this.props
+    const {onInputChange,addChatMsg} = this.props
+    const {inputValue,chatMessages} = this.props.state
     return ( 
     <div className = 'chat-container' >
       <div className="chat-msg-container">
         <div>
-        {chatMessages.map((msg,key)=>(
-          <ChatMsg key={key} {...msg}/>
-        ))
+        {chatMessages.map((msgData,key)=>{
+          return(
+            <Fragment key={key}>
+              {this.renderMsg(msgData,addChatMsg)}
+            </Fragment>
+          )
+        })
         }
         </div>
       </div>

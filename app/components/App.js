@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import ChatScreen from './ChatScreen';
 import jsonp from 'jsonp-es6';
+
+import ChatScreen from './ChatScreen';
+import getCurrentStepInputValues from '../config/flowLogic'
 const INITIAL_STATE = {
   onSplashScreen:true,
   chatMessages:[],
@@ -19,7 +21,6 @@ class App extends Component {
     })
   }
   componentDidMount(){
-    // this.goToChatScreen()
     this.getCityData()
   }
   goToChatScreen(){
@@ -45,6 +46,8 @@ class App extends Component {
         userCityTemp:response.currently.apparentTemperature,
         onSplashScreen:false,
         showChatScreen:true
+        },()=>{
+          this.gotoNextStep(1)
         })
       })
     });
@@ -55,23 +58,76 @@ class App extends Component {
     })
   }
 
-  addChatMsg = (botMsg)=>{
-    const source = botMsg && 'bot' || 'user'
-    const msg = botMsg || this.state.inputValue
-    const currentMessages = [...this.state.chatMessages]
+  addChatMsg = (botMsg,suggestions,tempSource)=>{
+    if(this.state.currentStep > 2 && this.state.inputValue){
+      const currentMessages = [...this.state.chatMessages]
+      const inputValue = this.state.inputValue
+      this.setState({
+        chatMessages:[...currentMessages,{
+          source:'user',
+          msg:inputValue
+        },{
+          source:'bot',
+          msg:`i'm sorry i can't understand you i'm just a bot!`
+        }],
+        inputValue:''
+      })
+      return
+    }
+    const source = tempSource || botMsg && 'bot' || 'user'
+    let msg
+    if(suggestions){
+      msg = {
+        txt:botMsg,
+        suggestions
+      }
+    }else{
+      msg = botMsg || this.state.inputValue
+    }
+    
+    const currentMessages = [...this.state.chatMessages] 
     this.setState({
       chatMessages:[...currentMessages,{
         source,
         msg
       }],
       inputValue:''
+    },()=>{
+      if(source === 'user'){
+        this.validateStep(msg)
+      }
     })
+    
+    
+  }
+  validateStep=(msg)=>{
+    const stepData = getCurrentStepInputValues(this.state,msg)
+    if(stepData.stepValidated){
+      this.gotoNextStep(stepData.goToStep,msg)
+    }else{
+      this.addChatMsg(stepData.botMsg,stepData.suggestions)
+    }
+    
+  }
+  gotoNextStep = (step)=>{
+    this.setState({
+      currentStep:step || this.state.currentStep + 1
+    },()=>{
+      const stepData = getCurrentStepInputValues({...this.state,currentStep:step || this.state.currentStep})
+      this.addChatMsg(stepData.botMsg)
+      if(stepData.stepDelay){
+        setTimeout(()=>{
+          this.gotoNextStep(stepData.goToStep)
+        },500)
+      }
+    })
+    
   }
   render() {
     return ( 
     <div className = 'chat-home' >
       {this.state.showChatScreen &&
-        <ChatScreen onInputChange={this.onInputChange} addChatMsg={this.addChatMsg} {...this.state}/>
+        <ChatScreen onInputChange={this.onInputChange} addChatMsg={this.addChatMsg.bind(this)} state={this.state}/>
       }
     </div>
     );

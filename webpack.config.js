@@ -73,7 +73,7 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192,
+              limit: 1,
               mimetype: 'image/png',
               name: 'images/[name].[ext]',
             }
