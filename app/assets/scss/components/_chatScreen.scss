@@ -1,0 +1,40 @@
+@import './chatInput';
+@import './chatMsg';
+@import './chatPills';
+@import './videoTag';
+@import './imageSlider';
+.chat-container {
+  background-image: url(../images/conversationWithoutText.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  padding: 1px;
+  overflow: hidden;
+  animation-name: opacity;
+  animation-duration: 2s;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15%;
+  .chat-msg-container {
+    height: 80%;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+  }
+  .chat-input-container {
+    display: flex;
+    align-items: flex-end;
+    height: 20%;
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,27 @@
+.input-container {
+  border: solid 1px $inputBorderColor;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  height: 40px;
+  flex-direction: row;
+  input {
+    border: none;
+    width: 70%;
+    height: 75%;
+    margin: auto;
+    padding-left: 15px;
+    outline: none !important;
+    font-size: 14px;
+  }
+  .send-btn {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $inputBorderColor;
+    color: $white;
+  }
+}

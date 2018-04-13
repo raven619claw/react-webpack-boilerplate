@@ -1,0 +1,32 @@
+.image-slider {
+  height: 200px;
+  width: 90%;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+  overflow: auto;
+  .slider-img {
+    display: inline-block;
+    height: 100%;
+    width: 70%;
+    margin-right: 20px;
+    vertical-align: top;
+    background-position: center;
+    background-size: 100% 100%;
+    &.img-2 {
+      background-image: url('../images/two.jpg')
+    }
+    &.img-1 {
+      background-image: url('../images/one.jpg')
+    }
+    &.img-3 {
+      background-image: url('../images/three.jpg')
+    }
+    &.img-4 {
+      background-image: url('../images/four.jpg')
+    }
+    &.img-5 {
+      background-image: url('../images/five.jpg')
+    }
+  }
+}
