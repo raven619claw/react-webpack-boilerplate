@@ -1,5 +1,5 @@
 import React,{PureComponent} from 'react';
-
+//used to take the user input and perform action based on it
 class ChatInput extends PureComponent{
   onKeyPress = (event)=>{
     if((event.which === 13 || event.keyCode === 13) && event.target.value){

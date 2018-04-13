@@ -1,5 +1,5 @@
 import React from 'react';
-
+//display user suggestions
 const ChatPills = (props)=>{
   const onClick = (pill)=>{
     props.addChatMsg(pill,null,'user')

@@ -3,6 +3,7 @@ import jsonp from 'jsonp-es6';
 
 import ChatScreen from './ChatScreen';
 import getCurrentStepInputValues from '../config/flowLogic'
+// this is the main app which contains the logic for user actions
 const INITIAL_STATE = {
   onSplashScreen:true,
   chatMessages:[],
@@ -23,6 +24,7 @@ class App extends Component {
   componentDidMount(){
     this.getCityData()
   }
+  // after getting the location data and delay of 3 sec go to chat screen
   goToChatScreen(){
     setTimeout(()=>{
       this.setState({
@@ -31,6 +33,7 @@ class App extends Component {
       })
     },3000)
   }
+  // get the location and temp data and move to chat screen
   getCityData = () => {
     const that = this
     jsonp('https://ipinfo.io')
@@ -44,9 +47,8 @@ class App extends Component {
       .then((response)=>{
         that.setState({
         userCityTemp:response.currently.apparentTemperature,
-        onSplashScreen:false,
-        showChatScreen:true
         },()=>{
+          this.goToChatScreen()
           this.gotoNextStep(1)
         })
       })
@@ -57,8 +59,10 @@ class App extends Component {
       inputValue:event.target.value
     })
   }
-
+  // main msg to add chats to the scrren
+  // based on the origin of chat can segregate what action to take
   addChatMsg = (botMsg,suggestions,tempSource)=>{
+    //if user has passed the steps where input is needed then give a dummy response
     if(this.state.currentStep > 2 && this.state.inputValue){
       const currentMessages = [...this.state.chatMessages]
       const inputValue = this.state.inputValue
@@ -76,6 +80,7 @@ class App extends Component {
     }
     const source = tempSource || botMsg && 'bot' || 'user'
     let msg
+    // based on step data correct data is addded to the chatMessages obj
     if(suggestions){
       msg = {
         txt:botMsg,
@@ -93,13 +98,14 @@ class App extends Component {
       }],
       inputValue:''
     },()=>{
+      //after updating chat data is the origin of chat msg is user then perform validations
       if(source === 'user'){
         this.validateStep(msg)
       }
     })
-    
-    
   }
+  //validate step to go to next step based on user msg
+  //if err then provide suggestions to user for correct input
   validateStep=(msg)=>{
     const stepData = getCurrentStepInputValues(this.state,msg)
     if(stepData.stepValidated){
@@ -109,6 +115,9 @@ class App extends Component {
     }
     
   }
+  //goto next step
+  //if user input is not required then keep going to next steps in flow after delay
+  // the creates a chat like experience
   gotoNextStep = (step)=>{
     this.setState({
       currentStep:step || this.state.currentStep + 1

@@ -8,11 +8,14 @@ import ChatPills from './ChatPills';
 import VideoTag from './VideoTag';
 import ImageSlider from './ImageSlider';
 import getCurrentStepInputValues from '../config/flowLogic'
-class ChatScreen extends Component {
 
+//component used to render the chat
+class ChatScreen extends Component {
+  //on valid chat input smooth scroll to bottom
   componentDidUpdate(prevProps, prevState, snapshot){
       this.dummyEl.scrollIntoView({ behavior: "smooth" });
   }
+  //based on the type of chat message display the correct data
   renderMsg(msgData,addChatMsg){
     if(msgData.msg.isVideoStep){
       return(<VideoTag src={msgData.msg.src}/>)

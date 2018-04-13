@@ -1,5 +1,7 @@
 let hairWashedTimes = null
 let hairType = null
+// defined the step logic in the file which based on the msg and current Active steps
+// returns the validation erros and suggestions or in case of correct data moves on to next step
 const getCurrentStepInputValues = (state, msg) => {
   let suggestions
   switch (state.currentStep) {

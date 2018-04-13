@@ -1,5 +1,5 @@
 import React from 'react';
-
+//display the basic chat messages
 const ChatMsg = (props)=>{
   if(!props.msg){
     return (<div/>)

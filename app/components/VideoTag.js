@@ -1,5 +1,8 @@
 import React from 'react';
-
+//basic video embd tag
+//can parametarize for generic video tag
+//as chrome changed permissions for autoplay
+//video does not play on load
 const VideoTag = (props)=>{
   return(
     <div>

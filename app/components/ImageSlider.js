@@ -1,5 +1,6 @@
 import React from 'react';
-
+//image slider
+// can parametarize this for generic input slider
 const ImageSlider = (props)=>{
   return(
     <div className='image-slider'>
