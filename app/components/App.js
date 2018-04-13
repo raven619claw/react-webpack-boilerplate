@@ -118,7 +118,7 @@ class App extends Component {
       if(stepData.stepDelay){
         setTimeout(()=>{
           this.gotoNextStep(stepData.goToStep)
-        },500)
+        },stepData.stepDelay)
       }
     })
     

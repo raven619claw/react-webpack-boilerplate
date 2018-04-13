@@ -11,7 +11,7 @@ class ChatInput extends PureComponent{
     return(
       <div className='input-container'>
         <input onKeyPress={this.onKeyPress} placeholder='Type your message here...' type="text" value={inputValue} onChange={(e)=>{onInputChange(e)}}/>
-        <div className='send-btn' onClick={()=>{addChatMsg()}}>SEND</div>
+        <div className='send-btn' onClick={()=>{inputValue && addChatMsg()}}>SEND</div>
       </div>
     )
   }

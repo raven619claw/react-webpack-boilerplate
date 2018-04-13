@@ -10,6 +10,9 @@ import ImageSlider from './ImageSlider';
 import getCurrentStepInputValues from '../config/flowLogic'
 class ChatScreen extends Component {
 
+  componentDidUpdate(prevProps, prevState, snapshot){
+      this.dummyEl.scrollIntoView({ behavior: "smooth" });
+  }
   renderMsg(msgData,addChatMsg){
     if(msgData.msg.isVideoStep){
       return(<VideoTag src={msgData.msg.src}/>)
@@ -31,6 +34,7 @@ class ChatScreen extends Component {
     return ( 
     <div className = 'chat-container' >
       <div className="chat-msg-container">
+        <div ref={(node)=>(this.dummyEl=node)}></div>
         <div>
         {chatMessages.map((msgData,key)=>{
           return(

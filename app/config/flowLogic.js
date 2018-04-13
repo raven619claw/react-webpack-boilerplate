@@ -11,7 +11,7 @@ const getCurrentStepInputValues = (state, msg) => {
             return {
               stepValidated: true,
               goToStep: 7,
-              stepDelay: true
+              stepDelay: 2000
             }
           }
           hairType = msg
@@ -62,7 +62,7 @@ const getCurrentStepInputValues = (state, msg) => {
         botMsg: `washing your hair ${hairWashedTimes} times per week when it is ${hairType} is not healthy`,
         stepValidated: true,
         goToStep: 5,
-        stepDelay: true
+        stepDelay: 2000
       }
       break;
     case 4:
@@ -70,7 +70,7 @@ const getCurrentStepInputValues = (state, msg) => {
         botMsg: `washing your hair ${hairWashedTimes} times per week when it is ${hairType} is not healthy`,
         stepValidated: true,
         goToStep: 5,
-        stepDelay: true
+        stepDelay: 2000
       }
       break;
     case 5:
@@ -78,7 +78,7 @@ const getCurrentStepInputValues = (state, msg) => {
         botMsg: `i recommend you use dove ${hairType === 'oily' ? 'oil control' : 'daily shine'} shampoo`,
         stepValidated: true,
         goToStep: 6,
-        stepDelay: true
+        stepDelay: 2000
       }
       break;
     case 6:
@@ -93,7 +93,7 @@ const getCurrentStepInputValues = (state, msg) => {
         botMsg: `That is great`,
         stepValidated: true,
         goToStep: 8,
-        stepDelay: true
+        stepDelay: 2000
       }
       break;
     case 8:
@@ -101,7 +101,7 @@ const getCurrentStepInputValues = (state, msg) => {
         botMsg: `I recommend you use dove oxygen moisture for even better results`,
         stepValidated: true,
         goToStep: 9,
-        stepDelay: true
+        stepDelay: 2000
       }
       break;
     case 9:
