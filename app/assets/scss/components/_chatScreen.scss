@@ -13,9 +13,11 @@
   overflow: hidden;
   animation-name: opacity;
   animation-duration: 2s;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15%;
   .chat-msg-container {
-    height: 65%;
-    margin-top: 20%;
+    height: 80%;
     padding: 0 5%;
     display: flex;
     flex-direction: column-reverse;
@@ -24,7 +26,7 @@
   .chat-input-container {
     display: flex;
     align-items: flex-end;
-    height: 25%;
+    height: 20%;
   }
 }
 
