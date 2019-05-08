@@ -35,24 +35,13 @@ class App extends Component {
   }
   // get the location and temp data and move to chat screen
   getCityData = () => {
-    const that = this
-    jsonp('https://ipinfo.io')
-    .then((response) => {
-      that.setState({
-      userCity:response.city
-      })
-      return response.loc
-    }).then((loc)=>{
-      jsonp(`https://api.darksky.net/forecast/87ded8c629a2197462e1ff01459ba3b1/${loc}`)
-      .then((response)=>{
-        that.setState({
-        userCityTemp:response.currently.apparentTemperature,
+    this.setState({
+                userCity:'gurgaon',
+        userCityTemp:43,
         },()=>{
           this.goToChatScreen()
           this.gotoNextStep(1)
         })
-      })
-    });
   }
   onInputChange = (event)=>{
     this.setState({
